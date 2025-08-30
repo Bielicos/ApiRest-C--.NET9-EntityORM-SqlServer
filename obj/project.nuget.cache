@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "1J39+Sbldzw=",
+  "success": true,
+  "projectFilePath": "/home/bielico/RiderProjects/Projetos Pessoais/ApiRest-NET9/ApiRest-NET9.csproj",
+  "expectedPackageFiles": [
+    "/home/bielico/.nuget/packages/microsoft.aspnetcore.openapi/9.0.8/microsoft.aspnetcore.openapi.9.0.8.nupkg.sha512",
+    "/home/bielico/.nuget/packages/microsoft.openapi/1.6.17/microsoft.openapi.1.6.17.nupkg.sha512"
+  ],
+  "logs": []
+}
