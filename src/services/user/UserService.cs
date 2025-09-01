@@ -56,7 +56,16 @@ public class UserService : IUserInterface
         ResponseModel<UserModel> response = new ResponseModel<UserModel>();
         try
         {
-            var user = await _context.users.FirstOrDefaultAsync();
+            var user = await _context.users.FirstOrDefaultAsync(userInDatabase => userInDatabase.userId == userId);
+            if (user == null)
+            {
+                throw new Exception("User not found :(");
+            }
+            else
+            {
+                response.Data = user;
+                response.Message = "User was found :)";
+            }
         }
         catch (Exception e)
         {

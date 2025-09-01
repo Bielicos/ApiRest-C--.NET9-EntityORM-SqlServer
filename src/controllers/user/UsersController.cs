@@ -20,5 +20,11 @@ public class UsersController : ControllerBase
         var users = await _userInterface.GetAllUsers();
         return Ok(users);
     }
-    
+
+    [HttpGet("getUserById/{userId:int}")]
+    public async Task<ActionResult<ResponseModel<UserModel>>> getUserById(int userId)
+    {
+        var user = await _userInterface.GetUserById(userId);
+        return Ok(user);
+    }
 }
