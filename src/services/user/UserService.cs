@@ -12,14 +12,69 @@ public class UserService : IUserInterface
     {
         this._context = context;
     }
+
+    public Task<ResponseModel<UserModel>> CreateUser(CreateUserDto dto)
+    {
+        try
+        {
+
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine("Exception: " + e);
+            throw;
+        }
+    }
     
     public Task<ResponseModel<List<UserModel>>> GetAllUsers()
     {
-        throw new NotImplementedException();
+        try
+        {
+
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine("Exception: " + e);
+            throw;
+        }
     }
 
     public Task<ResponseModel<UserModel>> GetUserById(int userId)
     {
-        throw new NotImplementedException();
+        try
+        {
+
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine("Exception: " + e);
+            throw;
+        }
+    }
+
+    public Task<ResponseModel<UserModel>> UpdateUser(int userId, updateUserDto dto)
+    {
+        try
+        {
+
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine("Exception: " + e);
+            throw;
+        }
+    }
+
+    public Task<ResponseModel<bool>> DeleteUser(int userId)
+    {
+        try
+        {
+
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine("Exception: " + e);
+            throw;
+        }
     }
 }
