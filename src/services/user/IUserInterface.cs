@@ -1,6 +1,6 @@
-using ApiRest_NET9.entity;
+using ApiRest_NET9.models;
 
-namespace ApiRest_NET9.services;
+namespace ApiRest_NET9.services.user;
 
 public interface IUserInterface
 {

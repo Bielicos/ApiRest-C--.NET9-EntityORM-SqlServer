@@ -1,4 +1,4 @@
-using ApiRest_NET9.entity;
+using ApiRest_NET9.models;
 using Microsoft.EntityFrameworkCore;
 
 namespace ApiRest_NET9.data;
@@ -12,6 +12,5 @@ public class ApiDbContext : Microsoft.EntityFrameworkCore.DbContext
     
     // Criação das tabelas
     public DbSet<UserModel> users { get; set; }
-    public DbSet<BookModel> books { get; set; }
-    public DbSet<AuthorModel> authors { get; set; }
+    public DbSet<ProjectModel> books { get; set; }
 }

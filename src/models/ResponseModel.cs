@@ -1,8 +1,8 @@
-namespace ApiRest_NET9.entity;
+namespace ApiRest_NET9.models;
 
 public class ResponseModel<T>
 {
     public T? Data { get; set; }
-    public string Message { get; set; } = String.Empty;
+    public string? Message { get; set; }
     public bool Status { get; set; } = true;
 }

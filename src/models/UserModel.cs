@@ -1,4 +1,4 @@
-namespace ApiRest_NET9.entity;
+namespace ApiRest_NET9.models;
 
 public class UserModel
 {
@@ -8,7 +8,7 @@ public class UserModel
     public required string email { get; set; }
     public required string password { get; set; }
 
-    public ICollection<BookModel>? books { get; set; }
+    public ICollection<ProjectModel>? projects { get; set; }
     // NoArgsConstructor
     protected UserModel() { }
 

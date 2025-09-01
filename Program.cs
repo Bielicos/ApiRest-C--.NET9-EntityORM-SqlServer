@@ -1,5 +1,5 @@
 using ApiRest_NET9.data;
-using ApiRest_NET9.services;
+using ApiRest_NET9.services.user;
 using Microsoft.EntityFrameworkCore;
 
 var builder =  WebApplication.CreateBuilder(args);

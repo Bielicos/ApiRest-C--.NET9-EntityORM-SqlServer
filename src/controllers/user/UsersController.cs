@@ -1,8 +1,7 @@
-using ApiRest_NET9.dtos;
-using ApiRest_NET9.services;
+ using ApiRest_NET9.services.user;
 using Microsoft.AspNetCore.Mvc;
 
-namespace ApiRest_NET9.controllers;
+namespace ApiRest_NET9.controllers.user;
 
 [ApiController]
 [Route("[controller]")]
