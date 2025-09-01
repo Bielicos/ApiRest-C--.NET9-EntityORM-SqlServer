@@ -4,7 +4,7 @@ namespace ApiRest_NET9.models;
 
 public class ProjectModel
 {
-    public required int taskId { get; set; }
+    public required int projectId { get; set; }
 
     public required string Title { get; set; }
     
@@ -15,9 +15,9 @@ public class ProjectModel
     
     public ProjectModel () { }
     
-    public ProjectModel(int taskId, string title)
+    public ProjectModel(int projectId, string title)
     {
-        this.taskId = taskId;
+        this.projectId = projectId;
         this.Title = title;
     }
 }

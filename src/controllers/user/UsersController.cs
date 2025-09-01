@@ -1,21 +1,24 @@
+ using ApiRest_NET9.models;
  using ApiRest_NET9.services.user;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ApiRest_NET9.controllers.user;
 
 [ApiController]
-[Route("[controller]")]
+[Route("api/[controller]")]
 public class UsersController : ControllerBase
 {
-    private UserService userService;
-    public UsersController(UserService userService)
+    private IUserInterface _userInterface;
+    public UsersController(IUserInterface userInterface)
     {
-        this.userService = userService;
+        this._userInterface = userInterface;
     }
 
-    // [HttpPost]
-    // public ActionResult createNewUser([FromBody] UserDto userDto)
-    // {
-    //     int userId = userService.createNewUser(userDto);
-    // }
+    [HttpGet("getAllUsers")]
+    public async Task<ActionResult<ResponseModel<List<UserModel>>>> getAllUsers()
+    {
+        var users = await _userInterface.GetAllUsers();
+        return Ok(users);
+    }
+    
 }
