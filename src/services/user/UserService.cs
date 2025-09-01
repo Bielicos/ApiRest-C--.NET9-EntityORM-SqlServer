@@ -1,5 +1,5 @@
 using ApiRest_NET9.data;
-using ApiRest_NET9.dtos;
+using ApiRest_NET9.controllers.user.dtos;
 using ApiRest_NET9.models;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,17 +14,29 @@ public class UserService : IUserInterface
         this._context = context;
     }
 
-    public Task<ResponseModel<UserModel>> CreateUser(CreateUserDto dto)
+    public async Task<ResponseModel<UserModel>> CreateUser(CreateUserDto dto)
     {
+        ResponseModel<UserModel> response = new ResponseModel<UserModel>();
         try
         {
-
+            var newUser = new UserModel()
+            {
+                name = dto.name,
+                email = dto.email,
+                password = dto.password
+            };
+            _context.Add(newUser);
+            await _context.SaveChangesAsync();
+            response.Data = await _context.users.FirstOrDefaultAsync(newUserInsideDatabase => newUserInsideDatabase.UserId == newUser.UserId);
+            response.Message = "User created successfully :)";
         }
         catch (Exception e)
         {
-            Console.WriteLine("Exception: " + e);
-            throw;
+            response.Message = e.Message;
+            response.Status = false;
         }
+
+        return response;
     }
     
     public async Task<ResponseModel<List<UserModel>>> GetAllUsers()
@@ -51,12 +63,12 @@ public class UserService : IUserInterface
         return response;
     }
 
-    public async Task<ResponseModel<UserModel>> GetUserById(int userId)
+    public async Task<ResponseModel<UserModel>> GetUserById(int UserId)
     {
         ResponseModel<UserModel> response = new ResponseModel<UserModel>();
         try
         {
-            var user = await _context.users.FirstOrDefaultAsync(userInDatabase => userInDatabase.userId == userId);
+            var user = await _context.users.FirstOrDefaultAsync(userInDatabase => userInDatabase.userId == UserId);
             if (user == null)
             {
                 throw new Exception("User not found :(");
@@ -75,24 +87,34 @@ public class UserService : IUserInterface
         return response;
     }
 
-    public Task<ResponseModel<UserModel>> UpdateUser(int userId, updateUserDto dto)
+    public async Task<ResponseModel<UserModel>> UpdateUser(int UserID, UpdateUserDto dto)
     {
+        ResponseModel<UserModel> response = new ResponseModel<UserModel>();
         try
         {
-
+            var userExists = _context.users.FirstOrDefaultAsync(userInDatabase => userInDatabase.UserId == UserID);
+            if (userExists == null)
+            {
+                throw new Exception("User not found :(");
+            }
         }
         catch (Exception e)
         {
             Console.WriteLine("Exception: " + e);
             throw;
         }
+        return response;
     }
 
-    public Task<ResponseModel<bool>> DeleteUser(int userId)
+    public Task<ResponseModel<bool>> DeleteUser(int UserId)
     {
         try
         {
-
+            var userExists = _context.users.FirstOrDefaultAsync(userInDatabase => userInDatabase.userId == UserId);
+            if (userExists == null)
+            {
+                throw new Exception("User not found :(");
+            }
         }
         catch (Exception e)
         {

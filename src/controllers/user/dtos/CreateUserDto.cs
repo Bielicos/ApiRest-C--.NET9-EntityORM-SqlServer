@@ -1,3 +1,3 @@
-namespace ApiRest_NET9.dtos;
+namespace ApiRest_NET9.controllers.user.dtos;
 
-public record CreateUserDto(int id, string name, string email, string password);
+public record CreateUserDto(string name, string email, string password);

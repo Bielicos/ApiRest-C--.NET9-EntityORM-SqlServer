@@ -1,3 +1,4 @@
+ using ApiRest_NET9.controllers.user.dtos;
  using ApiRest_NET9.models;
  using ApiRest_NET9.services.user;
 using Microsoft.AspNetCore.Mvc;
@@ -26,5 +27,12 @@ public class UsersController : ControllerBase
     {
         var user = await _userInterface.GetUserById(userId);
         return Ok(user);
+    }
+
+    [HttpPost("createUser")]
+    public async Task<ActionResult<ResponseModel<UserModel>>> createUser(CreateUserDto dto)
+    {
+        var newUser = await _userInterface.CreateUser(dto);
+        return Created($"/api/users/{newUser.Data.UserId}",  newUser);
     }
 }
