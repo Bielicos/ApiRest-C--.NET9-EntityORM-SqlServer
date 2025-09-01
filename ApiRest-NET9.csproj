@@ -24,7 +24,7 @@
 
     <ItemGroup>
       <Content Include="..\.dockerignore">
-        <Link>.dockerignore</Link>
+        <Link>docker\.dockerignore</Link>
       </Content>
     </ItemGroup>
 
