@@ -1,16 +1,17 @@
 ﻿services:
   sqlserver:
     container_name: sqlserver
-    image: mcr.microsoft.com/mssql/server:2025-latest
+    build:
+      context: ./docker
+      dockerfile: Dockerfile
     ports:
       - "1433:1433"
     environment:
       - ACCEPT_EULA=Y
-      - MSSQL_SA_PASSWORD=YourPassword123! 
-      - MSSQL_PID=Developer 
+      - MSSQL_SA_PASSWORD=YourPassword123!
+      - MSSQL_PID=Developer
     volumes:
-      - sqlserver_data:/var/opt/mssql 
-      - ./init.sql:/docker-entrypoint-initdb.d/init.sql 
+      - sqlserver_data:/var/opt/mssql
 
 volumes:
-  sqlserver_data: 
+  sqlserver_data:
