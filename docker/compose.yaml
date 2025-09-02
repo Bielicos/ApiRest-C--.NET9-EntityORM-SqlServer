@@ -1,9 +1,7 @@
 ﻿services:
   sqlserver:
     container_name: sqlserver
-    build:
-      context: ./docker
-      dockerfile: Dockerfile
+    image: mcr.microsoft.com/mssql/server:2025-latest
     ports:
       - "1433:1433"
     environment:
@@ -12,6 +10,28 @@
       - MSSQL_PID=Developer
     volumes:
       - sqlserver_data:/var/opt/mssql
+    networks:
+      - public_network
+
+  webapi:
+    container_name: webapi
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    depends_on:
+      - sqlserver
+    ports:
+      - "8080:8080"
+      - "8081:8081"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Server=sqlserver,1433;Database=ApiRestDB;User=sa;Password=YourPassword123!
+    networks:
+      - public_network
 
 volumes:
   sqlserver_data:
+
+networks:
+  public_network:
+    driver: bridge

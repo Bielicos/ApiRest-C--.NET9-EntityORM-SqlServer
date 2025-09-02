@@ -33,7 +33,7 @@ public class UsersController : ControllerBase
     public async Task<ActionResult<ResponseModel<UserModel>>> createUser(CreateUserDto dto)
     {
         var newUser = await _userInterface.CreateUser(dto);
-        return Created($"/api/users/{newUser.Data.UserId}",  newUser);
+        return Created($"/api/users/{newUser.Data.UserId}",  newUser); // Possivelmente nulo
     }
 
     [HttpPut("updateUser/{userId:int}")]
@@ -43,8 +43,8 @@ public class UsersController : ControllerBase
         return Ok(user);
     }
 
-    [HttpDelete("deleteUser/{userId:int}")]
-    public async Task<ActionResult<ResponseModel<String>>> deleteUser(int UserId)
+    [HttpDelete("deleteUserById/{userId:int}")]
+    public async Task<ActionResult<ResponseModel<String>>> deleteUserById(int UserId)
     {
         var user = await _userInterface.DeleteUser(UserId);
         return Ok(user);
