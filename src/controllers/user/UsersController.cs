@@ -35,4 +35,18 @@ public class UsersController : ControllerBase
         var newUser = await _userInterface.CreateUser(dto);
         return Created($"/api/users/{newUser.Data.UserId}",  newUser);
     }
+
+    [HttpPut("updateUser/{userId:int}")]
+    public async Task<ActionResult<ResponseModel<UserModel>>> updateUser(int UserId, UpdateUserDto dto)
+    {
+        var user = await _userInterface.UpdateUser(UserId, dto);
+        return Ok(user);
+    }
+
+    [HttpDelete("deleteUser/{userId:int}")]
+    public async Task<ActionResult<ResponseModel<String>>> deleteUser(int UserId)
+    {
+        var user = await _userInterface.DeleteUser(UserId);
+        return Ok(user);
+    }
 }

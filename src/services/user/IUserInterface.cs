@@ -9,5 +9,5 @@ public interface IUserInterface
     Task<ResponseModel<UserModel>> GetUserById(int UserId);
     Task<ResponseModel<UserModel>> CreateUser(CreateUserDto dto);
     Task<ResponseModel<UserModel>> UpdateUser(int UserID, UpdateUserDto dto);
-    Task<ResponseModel<bool>> DeleteUser(int UserId);
+    Task<ResponseModel<string>> DeleteUser(int UserId);
 }

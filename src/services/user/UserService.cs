@@ -68,7 +68,7 @@ public class UserService : IUserInterface
         ResponseModel<UserModel> response = new ResponseModel<UserModel>();
         try
         {
-            var user = await _context.users.FirstOrDefaultAsync(userInDatabase => userInDatabase.userId == UserId);
+            var user = await _context.users.FirstOrDefaultAsync(userInDatabase => userInDatabase.UserId == UserId);
             if (user == null)
             {
                 throw new Exception("User not found :(");
@@ -92,34 +92,67 @@ public class UserService : IUserInterface
         ResponseModel<UserModel> response = new ResponseModel<UserModel>();
         try
         {
-            var userExists = _context.users.FirstOrDefaultAsync(userInDatabase => userInDatabase.UserId == UserID);
+            var userExists = await _context.users.FirstOrDefaultAsync(userInDatabase => userInDatabase.UserId == UserID);
             if (userExists == null)
             {
                 throw new Exception("User not found :(");
             }
+            else
+            {
+                if (dto.name != null)
+                {
+                    userExists.name = dto.name;
+                }
+
+                if (dto.email != null)
+                {
+                    userExists.email = dto.email;
+                }
+
+                if (dto.password != null)
+                {
+                    userExists.password = dto.password;
+                }
+                
+                _context.Update(userExists);
+                await _context.SaveChangesAsync();
+                response.Data = await _context.users.FirstOrDefaultAsync(userInDatabase => userInDatabase.UserId == UserID);
+                response.Message = "User was updated successfully :)";
+                response.Status = true;
+            }
         }
         catch (Exception e)
         {
-            Console.WriteLine("Exception: " + e);
-            throw;
+            response.Message = e.Message;
+            response.Status = false;
         }
         return response;
     }
 
-    public Task<ResponseModel<bool>> DeleteUser(int UserId)
+    public async Task<ResponseModel<String>> DeleteUser(int UserId)
     {
+        ResponseModel<String> response = new ResponseModel<String>();
         try
         {
-            var userExists = _context.users.FirstOrDefaultAsync(userInDatabase => userInDatabase.userId == UserId);
+            var userExists = await _context.users.FirstOrDefaultAsync(userInDatabase => userInDatabase.UserId == UserId);
             if (userExists == null)
             {
                 throw new Exception("User not found :(");
             }
+            else
+            {
+                _context.Remove(userExists);
+                await _context.SaveChangesAsync();
+                response.Data = $"UserID : {UserId}";
+                response.Message = "User deleted successfully :)";
+                response.Status = true;
+            }
         }
         catch (Exception e)
         {
-            Console.WriteLine("Exception: " + e);
-            throw;
+            response.Message = e.Message;
+            response.Status = false;
         }
+        return response;
     }
 }
