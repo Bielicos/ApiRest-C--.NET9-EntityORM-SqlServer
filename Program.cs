@@ -15,6 +15,12 @@ builder.Services.AddControllers();
 
 var app =  builder.Build(); 
 
-app.MapControllers(); 
+app.MapControllers();
+
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<ApiDbContext>();
+    db.Database.Migrate();
+}
 
 app.Run(); 

@@ -27,13 +27,14 @@ public class UserService : IUserInterface
             };
             _context.Add(newUser);
             await _context.SaveChangesAsync();
-            response.Data = await _context.users.FirstOrDefaultAsync(newUserInsideDatabase => newUserInsideDatabase.UserId == newUser.UserId);
+            response.Data = newUser;
             response.Message = "User created successfully :)";
         }
         catch (Exception e)
         {
-            response.Message = e.Message;
+            response.Message = e.InnerException.Message;
             response.Status = false;
+            response.Data = null;
         }
 
         return response;

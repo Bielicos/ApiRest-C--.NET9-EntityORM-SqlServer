@@ -32,8 +32,23 @@ public class UsersController : ControllerBase
     [HttpPost("createUser")]
     public async Task<ActionResult<ResponseModel<UserModel>>> createUser(CreateUserDto dto)
     {
-        var newUser = await _userInterface.CreateUser(dto);
-        return Created($"/api/users/{newUser.Data.UserId}",  newUser); // Possivelmente nulo
+        if (dto == null)
+            return BadRequest("Request body is null.");
+
+        var result = await _userInterface.CreateUser(dto);
+
+        if (result == null)
+            return StatusCode(500, "Internal error: service returned null.");
+
+        // se o serviço indicou erro ou não retornou Data, devolva 400 (ou 500 conforme sua política)
+        if (!result.Status || result.Data == null)
+        {
+            // se quiser diferenciar: return BadRequest(result) ou return StatusCode(500, result);
+            return BadRequest(result);
+        }
+
+        // retorna 201 apontando para o GET que busca por id
+        return CreatedAtAction(nameof(getUserById), new { userId = result.Data.UserId }, result);
     }
 
     [HttpPut("updateUser/{userId:int}")]

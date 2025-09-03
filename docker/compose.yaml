@@ -25,7 +25,7 @@
       - "8081:8081"
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ConnectionStrings__DefaultConnection=Server=sqlserver,1433;Database=ApiRestDB;User=sa;Password=YourPassword123!
+      - ConnectionStrings__DefaultConnection=Server=sqlserver,1433;Database=master;User=sa;Password=YourPassword123!;Encrypt=False;TrustServerCertificate=True;
     networks:
       - public_network
 

@@ -21,52 +21,34 @@ namespace ApiRest_NET9.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("ApiRest_NET9.entity.Author", b =>
+            modelBuilder.Entity("ApiRest_NET9.models.ProjectModel", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("projectId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("projectId"));
 
-                    b.Property<string>("name")
+                    b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("id");
-
-                    b.ToTable("authors");
-                });
-
-            modelBuilder.Entity("ApiRest_NET9.entity.Book", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
 
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("authorid")
-                        .HasColumnType("int");
-
-                    b.HasKey("id");
-
-                    b.HasIndex("authorid");
+                    b.HasKey("projectId");
 
                     b.ToTable("books");
                 });
 
-            modelBuilder.Entity("ApiRest_NET9.entity.User", b =>
+            modelBuilder.Entity("ApiRest_NET9.models.UserModel", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("UserId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserId"));
 
                     b.Property<string>("email")
                         .IsRequired()
@@ -80,55 +62,39 @@ namespace ApiRest_NET9.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("id");
+                    b.HasKey("UserId");
 
                     b.ToTable("users");
                 });
 
-            modelBuilder.Entity("BookUser", b =>
+            modelBuilder.Entity("ProjectModelUserModel", b =>
                 {
-                    b.Property<int>("booksid")
+                    b.Property<int>("projectsprojectId")
                         .HasColumnType("int");
 
-                    b.Property<int>("usersid")
+                    b.Property<int>("usersUserId")
                         .HasColumnType("int");
 
-                    b.HasKey("booksid", "usersid");
+                    b.HasKey("projectsprojectId", "usersUserId");
 
-                    b.HasIndex("usersid");
+                    b.HasIndex("usersUserId");
 
-                    b.ToTable("BookUser");
+                    b.ToTable("ProjectModelUserModel");
                 });
 
-            modelBuilder.Entity("ApiRest_NET9.entity.Book", b =>
+            modelBuilder.Entity("ProjectModelUserModel", b =>
                 {
-                    b.HasOne("ApiRest_NET9.entity.Author", "author")
-                        .WithMany("books")
-                        .HasForeignKey("authorid")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("author");
-                });
-
-            modelBuilder.Entity("BookUser", b =>
-                {
-                    b.HasOne("ApiRest_NET9.entity.Book", null)
+                    b.HasOne("ApiRest_NET9.models.ProjectModel", null)
                         .WithMany()
-                        .HasForeignKey("booksid")
+                        .HasForeignKey("projectsprojectId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ApiRest_NET9.entity.User", null)
+                    b.HasOne("ApiRest_NET9.models.UserModel", null)
                         .WithMany()
-                        .HasForeignKey("usersid")
+                        .HasForeignKey("usersUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("ApiRest_NET9.entity.Author", b =>
-                {
-                    b.Navigation("books");
                 });
 #pragma warning restore 612, 618
         }
