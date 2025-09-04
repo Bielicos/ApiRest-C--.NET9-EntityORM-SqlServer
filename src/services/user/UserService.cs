@@ -28,6 +28,7 @@ public class UserService : IUserInterface
             _context.Add(newUser);
             await _context.SaveChangesAsync();
             response.Data = newUser;
+            response.Status = true;
             response.Message = "User created successfully :)";
         }
         catch (Exception e)
@@ -53,6 +54,7 @@ public class UserService : IUserInterface
             else
             {
                 response.Data = users;
+                response.Status = true;
                 response.Message = "All users were collected :)";
             }
         }
@@ -78,6 +80,7 @@ public class UserService : IUserInterface
             else
             {
                 response.Data = user;
+                response.Status = true;
                 response.Message = "User was found :)";
             }
         }
@@ -117,7 +120,7 @@ public class UserService : IUserInterface
                     userExists.Password = dto.Password;
                 }
                 
-                _context.Update(userExists);
+                _context.Users.Update(userExists);
                 await _context.SaveChangesAsync();
                 response.Data = await _context.Users.FirstOrDefaultAsync(userInDatabase => userInDatabase.UserId == UserID);
                 response.Message = "User was updated successfully :)";

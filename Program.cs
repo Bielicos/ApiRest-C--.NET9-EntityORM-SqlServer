@@ -1,10 +1,12 @@
 using ApiRest_NET9.data;
+using ApiRest_NET9.services.project;
 using ApiRest_NET9.services.user;
 using Microsoft.EntityFrameworkCore;
 
 var builder =  WebApplication.CreateBuilder(args);
 
 builder.Services.AddScoped<IUserInterface, UserService>();
+builder.Services.AddScoped<IProjectInterface,  ProjectService>();
 
 builder.Services.AddDbContext<ApiDbContext>(options =>
 {

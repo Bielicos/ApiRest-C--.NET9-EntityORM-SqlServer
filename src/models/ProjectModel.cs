@@ -19,9 +19,9 @@ public class ProjectModel
     
     public ProjectModel () { }
     
-    public ProjectModel(int ProjectId, string title)
+    public ProjectModel(string title, string description)
     {
-        this.ProjectId = ProjectId;
         this.Title = title;
+        this.Description = description;
     }
 }

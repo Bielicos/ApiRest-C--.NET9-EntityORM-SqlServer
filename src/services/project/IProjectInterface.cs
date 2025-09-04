@@ -7,7 +7,7 @@ public interface IProjectInterface
 {
     Task<ResponseModel<ProjectModel>> getProjectById(int ProjectId);
     
-    Task<ResponseModel<ProjectModel>> getAllProjects();
+    Task<ResponseModel<List<ProjectModel>>> getAllProjects();
     
     Task<ResponseModel<ProjectModel>> createNewProject(CreateProjectDto dto);
     
