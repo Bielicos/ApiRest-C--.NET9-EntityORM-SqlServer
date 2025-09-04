@@ -21,9 +21,9 @@ public class UserService : IUserInterface
         {
             var newUser = new UserModel()
             {
-                name = dto.name,
-                email = dto.email,
-                password = dto.password
+                Name = dto.Name,
+                Email = dto.Email,
+                Password = dto.Password
             };
             _context.Add(newUser);
             await _context.SaveChangesAsync();
@@ -45,7 +45,7 @@ public class UserService : IUserInterface
         ResponseModel<List<UserModel>> response = new ResponseModel<List<UserModel>>();
         try
         {
-            var users = await _context.users.ToListAsync();
+            var users = await _context.Users.ToListAsync();
             if (users.Count == 0)
             {
                 throw new Exception("No users found :(");
@@ -69,7 +69,7 @@ public class UserService : IUserInterface
         ResponseModel<UserModel> response = new ResponseModel<UserModel>();
         try
         {
-            var user = await _context.users.FirstOrDefaultAsync(userInDatabase => userInDatabase.UserId == UserId);
+            var user = await _context.Users.FirstOrDefaultAsync(userInDatabase => userInDatabase.UserId == UserId);
             if (user == null)
             {
                 throw new Exception("User not found :(");
@@ -93,31 +93,31 @@ public class UserService : IUserInterface
         ResponseModel<UserModel> response = new ResponseModel<UserModel>();
         try
         {
-            var userExists = await _context.users.FirstOrDefaultAsync(userInDatabase => userInDatabase.UserId == UserID);
+            var userExists = await _context.Users.FirstOrDefaultAsync(userInDatabase => userInDatabase.UserId == UserID);
             if (userExists == null)
             {
                 throw new Exception("User not found :(");
             }
             else
             {
-                if (dto.name != null)
+                if (dto.Name != null)
                 {
-                    userExists.name = dto.name;
+                    userExists.Name = dto.Name;
                 }
 
-                if (dto.email != null)
+                if (dto.Email != null)
                 {
-                    userExists.email = dto.email;
+                    userExists.Email = dto.Email;
                 }
 
-                if (dto.password != null)
+                if (dto.Password != null)
                 {
-                    userExists.password = dto.password;
+                    userExists.Password = dto.Password;
                 }
                 
                 _context.Update(userExists);
                 await _context.SaveChangesAsync();
-                response.Data = await _context.users.FirstOrDefaultAsync(userInDatabase => userInDatabase.UserId == UserID);
+                response.Data = await _context.Users.FirstOrDefaultAsync(userInDatabase => userInDatabase.UserId == UserID);
                 response.Message = "User was updated successfully :)";
                 response.Status = true;
             }
@@ -135,7 +135,7 @@ public class UserService : IUserInterface
         ResponseModel<String> response = new ResponseModel<String>();
         try
         {
-            var userExists = await _context.users.FirstOrDefaultAsync(userInDatabase => userInDatabase.UserId == UserId);
+            var userExists = await _context.Users.FirstOrDefaultAsync(userInDatabase => userInDatabase.UserId == UserId);
             if (userExists == null)
             {
                 throw new Exception("User not found :(");

@@ -8,20 +8,20 @@ public class ProjectModel
 {
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public required int projectId { get; set; }
+    public int ProjectId { get; set; }
 
     public required string Title { get; set; }
     
     public required string Description { get; set; }
     
     [JsonIgnore]
-    public ICollection<UserModel>? users { get; set; }
+    public ICollection<UserModel>? Users { get; set; }
     
     public ProjectModel () { }
     
-    public ProjectModel(int projectId, string title)
+    public ProjectModel(int ProjectId, string title)
     {
-        this.projectId = projectId;
+        this.ProjectId = ProjectId;
         this.Title = title;
     }
 }

@@ -8,19 +8,19 @@ public class UserModel
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int UserId { get; set; }
-    public required string name { get; set; }
-    public required string email { get; set; }
-    public required string password { get; set; }
+    public required string Name { get; set; }
+    public required string Email { get; set; }
+    public required string Password { get; set; }
 
-    public ICollection<ProjectModel>? projects { get; set; }
+    public ICollection<ProjectModel>? Projects { get; set; }
     // NoArgsConstructor
     public UserModel() { }
 
     // AllArgsConstructor
     public UserModel(string name, string email, string password)
     {
-        this.name = name;
-        this.email = email;
-        this.password = password;
+        this.Name = name;
+        this.Email = email;
+        this.Password = password;
     }
 }
