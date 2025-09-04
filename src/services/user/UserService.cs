@@ -32,7 +32,7 @@ public class UserService : IUserInterface
         }
         catch (Exception e)
         {
-            response.Message = e.InnerException.Message;
+            response.Message = e.Message;
             response.Status = false;
             response.Data = null;
         }
@@ -60,6 +60,7 @@ public class UserService : IUserInterface
         {
             response.Status = false;
             response.Message = e.Message;
+            response.Data = null;
         }
         return response;
     }
@@ -84,6 +85,7 @@ public class UserService : IUserInterface
         {
             response.Message = e.Message;
             response.Status = false;
+            response.Data = null;
         }
         return response;
     }
@@ -126,6 +128,7 @@ public class UserService : IUserInterface
         {
             response.Message = e.Message;
             response.Status = false;
+            response.Data = null;
         }
         return response;
     }
@@ -153,6 +156,7 @@ public class UserService : IUserInterface
         {
             response.Message = e.Message;
             response.Status = false;
+            response.Data = null;
         }
         return response;
     }
