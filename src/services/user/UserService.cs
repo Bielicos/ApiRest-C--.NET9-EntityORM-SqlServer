@@ -19,6 +19,10 @@ public class UserService : IUserInterface
         ResponseModel<UserModel> response = new ResponseModel<UserModel>();
         try
         {
+            if (dto == null)
+            {
+                throw new Exception("Dto is empty :(");
+            }
             var newUser = new UserModel()
             {
                 Name = dto.Name,
@@ -99,6 +103,10 @@ public class UserService : IUserInterface
         try
         {
             var userExists = await _context.Users.FirstOrDefaultAsync(userInDatabase => userInDatabase.UserId == UserID);
+            if (dto == null)
+            {
+                throw new Exception("Dto is empty :(");
+            }
             if (userExists == null)
             {
                 throw new Exception("User not found :(");

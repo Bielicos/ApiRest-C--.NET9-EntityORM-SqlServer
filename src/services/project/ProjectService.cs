@@ -146,7 +146,7 @@ public class ProjectService : IProjectInterface
            {
                _dbContext.Projects.Remove(projectExists);
                await _dbContext.SaveChangesAsync();
-               response.Data = $"ProjectId : {ProjectId}}";
+               response.Data = $"ProjectId : {{ProjectId}}";
                response.Status = true;
                response.Message = "Project deleted successfully.";
            }

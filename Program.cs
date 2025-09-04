@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 var builder =  WebApplication.CreateBuilder(args);
 
 builder.Services.AddScoped<IUserInterface, UserService>();
-builder.Services.AddScoped<IProjectInterface,  ProjectService>();
+builder.Services.AddScoped<IProjectInterface, ProjectService>();
 
 builder.Services.AddDbContext<ApiDbContext>(options =>
 {
@@ -15,7 +15,7 @@ builder.Services.AddDbContext<ApiDbContext>(options =>
 
 builder.Services.AddControllers();
 
-var app =  builder.Build(); 
+var app =  builder.Build();
 
 app.MapControllers();
 
