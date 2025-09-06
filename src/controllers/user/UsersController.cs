@@ -22,7 +22,7 @@ public class UsersController : ControllerBase
         return Ok(users);
     }
 
-    [HttpGet("/{userId:int}")]
+    [HttpGet("{userId:int}")]
     public async Task<ActionResult<ResponseModel<UserModel>>> getUserById(int userId)
     {
         var user = await _userInterface.GetUserById(userId);
@@ -36,14 +36,14 @@ public class UsersController : ControllerBase
         return CreatedAtAction(nameof(getUserById), new { userId = result.Data.UserId }, result);
     }
 
-    [HttpPut("/{userId:int}")]
+    [HttpPut("{userId:int}")]
     public async Task<ActionResult<ResponseModel<UserModel>>> updateUser(int UserId, UpdateUserDto dto)
     {
         var user = await _userInterface.UpdateUser(UserId, dto);
         return Ok(user);
     }
 
-    [HttpDelete("/{userId:int}")]
+    [HttpDelete("{userId:int}")]
     public async Task<ActionResult<ResponseModel<String>>> deleteUserById(int UserId)
     {
         var user = await _userInterface.DeleteUser(UserId);
