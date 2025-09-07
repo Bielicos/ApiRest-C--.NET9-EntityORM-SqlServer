@@ -74,6 +74,7 @@ public class ProjectService : IProjectInterface
             {
                 Title = dto.Title,
                 Description = dto.Description,
+                Users = new  List<UserModel>()
             };
             
             _dbContext.Projects.Add(newProject);

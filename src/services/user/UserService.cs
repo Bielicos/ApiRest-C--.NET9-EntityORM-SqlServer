@@ -27,7 +27,8 @@ public class UserService : IUserInterface
             {
                 Name = dto.Name,
                 Email = dto.Email,
-                Password = dto.Password
+                Password = dto.Password,
+                Projects = new List<ProjectModel>()
             };
             _context.Add(newUser);
             await _context.SaveChangesAsync();

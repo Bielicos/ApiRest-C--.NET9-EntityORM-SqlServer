@@ -14,7 +14,7 @@ public class UserModel
     public required string Password { get; set; }
 
     [JsonIgnore]
-    public ICollection<ProjectModel>? Projects { get; set; }
+    public ICollection<ProjectModel> Projects { get; set; }
     
     // NoArgsConstructor
     public UserModel() { }

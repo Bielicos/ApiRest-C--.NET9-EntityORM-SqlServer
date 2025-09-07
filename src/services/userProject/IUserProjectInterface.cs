@@ -10,5 +10,5 @@ public interface IUserProjectInterface
     
     Task<ResponseModel<String>> associateUserToProject(int ProjectId, int UserId);
     
-    Task<ResponseModel<String>> DeleteUserFromProject(int  ProjectId, int UserId);
+    Task<ResponseModel<String>> DisassociateUserFromProject(int  ProjectId, int UserId);
 }
