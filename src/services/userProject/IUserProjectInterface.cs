@@ -8,7 +8,7 @@ public interface IUserProjectInterface
     
     Task<ResponseModel<List<UserModel>>> GetAllUsersFromProject(int ProjectId);
     
-    Task<ResponseModel<String>> associateUserToProject(int ProjectId, int UserId);
+    Task<ResponseModel<String>> AssociateUserToProject(int ProjectId, int UserId);
     
     Task<ResponseModel<String>> DisassociateUserFromProject(int  ProjectId, int UserId);
 }

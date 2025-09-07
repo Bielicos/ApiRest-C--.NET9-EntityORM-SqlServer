@@ -74,7 +74,7 @@ public class UserProjectService : IUserProjectInterface
         return response;
     }
 
-    public async Task<ResponseModel<string>> associateUserToProject(int ProjectId, int UserId)
+    public async Task<ResponseModel<string>> AssociateUserToProject(int ProjectId, int UserId)
     {
         ResponseModel<String> response = new ResponseModel<String>();
         try
@@ -152,7 +152,7 @@ public class UserProjectService : IUserProjectInterface
             
             userExists.Projects.Remove(projectExists);
             await _context.SaveChangesAsync();
-            response.Message = "Success! User associated to project!";
+            response.Message = "Success! User removed from project!";
             response.Status = true;
             response.Data = $"UserID : {UserId} | ProjectID : {ProjectId}";
         }
