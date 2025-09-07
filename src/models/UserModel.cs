@@ -11,19 +11,19 @@ public class UserModel
     public int UserId { get; set; }
     public required string Name { get; set; }
     public required string Email { get; set; }
-    public required string Password { get; set; }
+    public string HashedPassword { get; set; }
 
     [JsonIgnore]
-    public ICollection<ProjectModel> Projects { get; set; }
+    public ICollection<ProjectModel>? Projects { get; set; }
     
     // NoArgsConstructor
     public UserModel() { }
 
     // AllArgsConstructor
-    public UserModel(string name, string email, string password)
+    public UserModel(string name, string email, string hashedPassword)
     {
         this.Name = name;
         this.Email = email;
-        this.Password = password;
+        this.HashedPassword = hashedPassword;
     }
 }

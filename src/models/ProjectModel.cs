@@ -15,7 +15,7 @@ public class ProjectModel
     public required string Description { get; set; }
     
     [JsonIgnore]
-    public ICollection<UserModel> Users { get; set; }
+    public ICollection<UserModel>? Users { get; set; }
     
     public ProjectModel () { }
     

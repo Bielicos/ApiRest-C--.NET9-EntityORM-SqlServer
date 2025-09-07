@@ -1,6 +1,7 @@
 using ApiRest_NET9.data;
 using ApiRest_NET9.controllers.user.dtos;
 using ApiRest_NET9.models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace ApiRest_NET9.services.user;
@@ -8,10 +9,12 @@ namespace ApiRest_NET9.services.user;
 public class UserService : IUserInterface
 {
     private readonly ApiDbContext _context;
+    private readonly PasswordHasher<UserModel> _passwordHasher;
 
-    public UserService(ApiDbContext context)
+    public UserService(ApiDbContext context,  PasswordHasher<UserModel> passwordHasher)
     {
         this._context = context;
+        this._passwordHasher = passwordHasher;
     }
 
     public async Task<ResponseModel<UserModel>> CreateUser(CreateUserDto dto)
@@ -23,13 +26,15 @@ public class UserService : IUserInterface
             {
                 throw new Exception("Dto is empty :(");
             }
+            
             var newUser = new UserModel()
             {
                 Name = dto.Name,
                 Email = dto.Email,
-                Password = dto.Password,
                 Projects = new List<ProjectModel>()
             };
+            newUser.HashedPassword = this._passwordHasher.HashPassword(newUser, dto.Password);
+            
             _context.Add(newUser);
             await _context.SaveChangesAsync();
             response.Data = newUser;
@@ -126,7 +131,7 @@ public class UserService : IUserInterface
 
                 if (dto.Password != null)
                 {
-                    userExists.Password = dto.Password;
+                    userExists.HashedPassword = dto.Password;
                 }
                 
                 _context.Users.Update(userExists);
