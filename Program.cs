@@ -1,7 +1,10 @@
 using ApiRest_NET9.data;
+using ApiRest_NET9.models;
+using ApiRest_NET9.services.auth;
 using ApiRest_NET9.services.project;
 using ApiRest_NET9.services.user;
 using ApiRest_NET9.services.userProject;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder =  WebApplication.CreateBuilder(args);
@@ -9,6 +12,9 @@ var builder =  WebApplication.CreateBuilder(args);
 builder.Services.AddScoped<IUserInterface, UserService>();
 builder.Services.AddScoped<IProjectInterface, ProjectService>();
 builder.Services.AddScoped<IUserProjectInterface,  UserProjectService>();
+builder.Services.AddScoped<IAuthInterface, AuthService>();
+
+builder.Services.AddScoped<IPasswordHasher<UserModel>, PasswordHasher<UserModel>>();
 
 builder.Services.AddDbContext<ApiDbContext>(options =>
 {

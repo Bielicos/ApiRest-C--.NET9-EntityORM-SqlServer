@@ -9,9 +9,9 @@ namespace ApiRest_NET9.services.user;
 public class UserService : IUserInterface
 {
     private readonly ApiDbContext _context;
-    private readonly PasswordHasher<UserModel> _passwordHasher;
+    private readonly IPasswordHasher<UserModel> _passwordHasher;
 
-    public UserService(ApiDbContext context,  PasswordHasher<UserModel> passwordHasher)
+    public UserService(ApiDbContext context,  IPasswordHasher<UserModel> passwordHasher)
     {
         this._context = context;
         this._passwordHasher = passwordHasher;
@@ -131,7 +131,7 @@ public class UserService : IUserInterface
 
                 if (dto.Password != null)
                 {
-                    userExists.HashedPassword = dto.Password;
+                    userExists.HashedPassword = this._passwordHasher.HashPassword(userExists, dto.Password);
                 }
                 
                 _context.Users.Update(userExists);
