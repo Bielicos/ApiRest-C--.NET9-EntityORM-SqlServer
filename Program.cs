@@ -7,6 +7,8 @@ using ApiRest_NET9.services.userProject;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
+DotNetEnv.Env.Load();
+
 var builder =  WebApplication.CreateBuilder(args);
 
 builder.Services.AddScoped<IUserInterface, UserService>();

@@ -162,3 +162,5 @@
 /home/bielico/RiderProjects/Projetos Pessoais/ApiRest-NET9/obj/Debug/net9.0/ApiRest-NET9.pdb
 /home/bielico/RiderProjects/Projetos Pessoais/ApiRest-NET9/obj/Debug/net9.0/ApiRest-NET9.genruntimeconfig.cache
 /home/bielico/RiderProjects/Projetos Pessoais/ApiRest-NET9/obj/Debug/net9.0/ref/ApiRest-NET9.dll
+/home/bielico/RiderProjects/Projetos Pessoais/ApiRest-NET9/bin/Debug/net9.0/DotNetEnv.dll
+/home/bielico/RiderProjects/Projetos Pessoais/ApiRest-NET9/bin/Debug/net9.0/Sprache.dll
